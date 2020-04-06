@@ -19,6 +19,11 @@ Its characteristics :
     - client side rendering with XSL stylesheets
     - pages are saved using HTTP PUT methods
 
+Screenshot
+==========
+
+![Screenshot](screenshot.png)
+
 How to use it
 =============
 

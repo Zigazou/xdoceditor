@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<link rel="stylesheet" href="xdoceditor.css">
+	</head>
+	<body>
+		<script id="tag-types" type="application/json">
+			{
+				"page": {
+					"type": "string",
+					"contains": ["title", "author", "description", "content"],
+					"attributes": ["lang"]
+				},
+			
+				"title": {
+					"type": "string",
+					"contains": ["text"],
+					"attributes": []
+				},
+			
+				"author": {
+					"type": "string",
+					"contains": ["text"],
+					"attributes": []
+				},
+			
+				"description": {
+					"type": "string",
+					"contains": ["text"],
+					"attributes": []
+				},
+			
+				"content": {
+					"type": "string",
+					"contains": ["p", "ul", "note", "application", "heading", "listing", "definitions", "tiles", "root"],
+					"attributes": ["size"]
+				},
+			
+				"heading": {
+					"type": "string",
+					"contains": ["p", "heading", "listing", "ul", "definitions", "tiles", "root", "note"],
+					"attributes": ["title"]
+				},
+			
+				"ul": {
+					"type": "string",
+					"contains": ["li"],
+					"attributes": []
+				},
+			
+				"li": {
+					"type": "string",
+					"contains": ["text", "p", "a", "code", "strong", "download", "img", "ul", "note"],
+					"attributes": []
+				},
+			
+				"p": {
+					"type": "string",
+					"contains": ["text", "a", "strong", "code", "download", "img"],
+					"attributes": []
+				},
+			
+				"a": {
+					"type": "string",
+					"contains": ["text", "img"],
+					"attributes": ["href", "title"]
+				},
+			
+				"strong": {
+					"type": "string",
+					"contains": ["text"],
+					"attributes": []
+				},
+			
+				"code": {
+					"type": "pre",
+					"contains": ["text"],
+					"attributes": []
+				},
+			
+				"application": {
+					"type": "string",
+					"contains": [],
+					"attributes": ["script", "stylesheet", "id"]
+				},
+			
+				"listing": {
+					"type": "pre",
+					"contains": ["text"],
+					"attributes": ["type"]
+				},
+			
+				"note": {
+					"type": "string",
+					"contains": ["text", "p", "ul", "code", "a", "strong", "listing", "download", "img", "root"],
+					"attributes": ["type"]
+				},
+
+				"definitions": {
+					"type": "string",
+					"contains": ["term"],
+					"attributes": []
+				},
+
+				"term": {
+					"type": "string",
+					"contains": ["text", "strong", "a", "code", "download", "img", "root"],
+					"attributes": ["title"]
+				},
+
+				"tiles": {
+					"type": "string",
+					"contains": ["link"],
+					"attributes": []
+				},
+
+				"link": {
+					"type": "string",
+					"contains": [],
+					"attributes": ["href", "title"]
+				},
+
+				"download": {
+					"type": "string",
+					"contains": ["text"],
+					"attributes": ["href", "size"]
+				},
+
+				"img": {
+					"type": "string",
+					"contains": [],
+					"attributes": ["src", "title"]
+				},
+
+				"root": {
+					"type": "string",
+					"contains": ["leaf"],
+					"attributes": ["title"]
+					
+				},
+
+				"leaf": {
+					"type": "string",
+					"contains": ["leaf"],
+					"attributes": ["title"]
+				}
+			}
+		</script>
+
+		<script id="tag-templates" type="application/json">
+			{
+				"p-code-text": {
+					"tag": "p",
+					"children": [
+						"text", "code", "text", "code", "text", "code",
+						"text", "code", "text", "code", "text", "code",
+						"text", "code", "text", "code", "text"
+					]
+				},
+				"ul-li": {
+					"tag": "ul",
+					"children": [
+						"li", "li", "li", "li", "li", "li", "li", "li",
+						"li", "li", "li", "li", "li", "li", "li", "li"
+					]
+				},
+				"li-code-text": {
+					"tag": "li",
+					"children": [
+						"text", "code", "text", "code", "text", "code",
+						"text", "code", "text", "code", "text", "code",
+						"text", "code", "text", "code", "text"
+					]
+				},
+				"defintions-term": {
+					"tag": "definitions",
+					"children": [
+						"term", "term", "term", "term", "term", "term", "term",
+						"term", "term", "term", "term", "term", "term", "term"
+					]
+				}
+			}
+		</script>
+
+		<div class="workspace">
+			<div class="workspace-menu">
+				<h1 class="menu-title">XDocEditor</h1>
+				<div class="menu-pageurl"></div>
+				<button class="commands-icon commands-menu-new">New</button>
+				<button class="commands-icon commands-menu-save">Save</button>
+				<button class="commands-icon commands-menu-preview">Preview</button>
+			</div>
+			<div id="xdoceditor" class="workspace-editor">
+				<div class="stylesheet">
+					<div class="stylesheet-title">XSL: </div>
+					<div class="stylesheet-url" contenteditable="true"></div>
+				</div>
+
+				<div class="commands">
+					<div class="commands-titlebar">
+						<button class="commands-titlebar-close" title="Close">✖</button>
+						<div class="commands-titlebar-title"></div>
+					</div>
+					<div class="commands-content">
+						<div class="commands-delete-title">Delete</div>
+						<div class="commands-delete">
+							<button class="commands-icon commands-delete-one">Delete</button>
+							<button class="commands-icon commands-delete-next">Delete next siblings</button>
+						</div>
+						<div class="commands-ccp-title">Cut, copy, paste</div>
+						<div class="commands-ccp">
+							<button class="commands-icon commands-ccp-cut">Cut</button>
+							<button class="commands-icon commands-ccp-copy">Copy</button>
+							<button class="commands-icon commands-ccp-paste-before">Paste before</button>
+							<button class="commands-icon commands-ccp-paste-inside">Paste inside</button>
+							<button class="commands-icon commands-ccp-paste-after">Paste after</button>
+						</div>
+						<div class="commands-sibling-title">Insert before or after</div>
+						<div class="commands-sibling">
+							<select class="commands-sibling-tags"></select>
+							<button class="commands-icon commands-sibling-before">Add before</button>
+							<button class="commands-icon commands-sibling-after">Add after</button>
+						</div>
+						<div class="commands-inside-title">Insert inside</div>
+						<div class="commands-inside">
+							<select class="commands-inside-tags"></select>
+							<button class="commands-icon commands-inside-insert">Add inside</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="xdoceditor-preview" class="workspace-preview"></div>
+		</div>
+
+		<script type="module" src="run-editor.js"></script>
+	</body>
+</html>

@@ -1,6 +1,20 @@
 import { HTMLXML } from './htmlxml.js'
 import { Commands } from './commands.js'
 
+const authorizedUrlCharacters =
+	'/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.'
+
+function validUrlChar(c) {
+	return authorizedUrlCharacters.indexOf(c) >= 0
+}
+
+function validUrlDoc(url) {
+	if (url === null || url === '') return false
+	if (url[0] !== '/') return false
+	if (url.substr(-4) !== ".xml" || url.substr(-5, 1) === "/") return false
+	return [...url].every(validUrlChar)
+}
+
 export class XDocEditor {
 	constructor(root, tagTypes, tagTemplates) {
 		this.root = root
@@ -40,7 +54,18 @@ export class XDocEditor {
 	}
 
 	load(fromURL, newURL="") {
+		if (!validUrlDoc(fromURL)) {
+			alert("Invalid URL")
+			return
+		}
+
+		if (newURL !== "" && !validUrlDoc(newURL)) {
+			alert("Invalid new URL")
+			return
+		}
+
 		this.xmlURL = newURL ? newURL : fromURL
+
 		document.querySelector(".menu-pageurl").innerText = this.xmlURL
 
 		if (!this.xmlURL) return;
@@ -112,7 +137,20 @@ export class XDocEditor {
 	}
 
 	newFile() {
-		const url = prompt('URL of the new file')
+		let playAgain = true
+		let url = ""
+
+		while (playAgain) {
+			url = prompt('URL of the new file')
+			if (url === null) return;
+
+			if (validUrlDoc(url)) {
+				playAgain = false
+			} else {
+				alert("Invalid URL")
+			}
+		}
+
 		this.load("/xdoceditor/new.xml", url)
 	}
 

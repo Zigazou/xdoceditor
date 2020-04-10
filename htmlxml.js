@@ -176,7 +176,9 @@ export class HTMLXML {
 		const tagName = tag.dataset.name
 
 		if (tagName === "text") {
-			parent.appendChild(document.createTextNode(tag.innerText))
+			parent.appendChild(document.createTextNode(
+				tag.innerText.trimRight("\n")
+			))
 			return
 		}
 

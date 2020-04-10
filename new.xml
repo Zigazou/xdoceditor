@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="/style/page-other.xsl" type="text/xsl" ?>
+<?xml-stylesheet href="/style/page.xsl" type="text/xsl" ?>
 <page lang="fr">
 	<title>Une page de Zigazou.dev</title>
 	<author>Frédéric BISSON</author>
 	<description>Une description</description>
 	<content size="long">
 		<heading title="Titre 1">
+			<p>Texte</p>
 		</heading>
 	</content>
 </page>

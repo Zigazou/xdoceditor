@@ -10,140 +10,185 @@
 				"page": {
 					"type": "string",
 					"contains": ["title", "author", "description", "content"],
-					"attributes": ["lang"]
+					"attributes": ["lang"],
+					"favnext": "",
+					"favinside": "title"
 				},
 			
 				"title": {
 					"type": "string",
 					"contains": ["text"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "author",
+					"favinside": "#text"
 				},
 			
 				"author": {
 					"type": "string",
 					"contains": ["text"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "description",
+					"favinside": "#text"
 				},
 			
 				"description": {
 					"type": "string",
 					"contains": ["text"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "content",
+					"favinside": "#text"
 				},
 			
 				"content": {
 					"type": "string",
 					"contains": ["p", "ul", "note", "application", "heading", "listing", "definitions", "tiles", "root"],
-					"attributes": ["size"]
+					"attributes": ["size"],
+					"favnext": "",
+					"favinside": "heading"
 				},
 			
 				"heading": {
 					"type": "string",
 					"contains": ["p", "heading", "listing", "ul", "definitions", "tiles", "root", "note"],
-					"attributes": ["title"]
+					"attributes": ["title"],
+					"favnext": "heading",
+					"favinside": "p"
 				},
 			
 				"ul": {
 					"type": "string",
 					"contains": ["li"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "p",
+					"favinside": "li"
 				},
 			
 				"li": {
 					"type": "string",
 					"contains": ["text", "p", "a", "code", "strong", "download", "img", "ul", "note"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "li",
+					"favinside": "#text"
 				},
 			
 				"p": {
 					"type": "string",
 					"contains": ["text", "a", "strong", "code", "download", "img"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "p",
+					"favinside": "#text"
 				},
 			
 				"a": {
 					"type": "string",
 					"contains": ["text", "img"],
-					"attributes": ["href", "title"]
+					"attributes": ["href", "title"],
+					"favnext": "#text",
+					"favinside": "#text"
 				},
 			
 				"strong": {
 					"type": "string",
 					"contains": ["text"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "#next",
+					"favinside": "#text"
 				},
 			
 				"code": {
 					"type": "pre",
 					"contains": ["text"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "#text",
+					"favinside": "#text"
 				},
 			
 				"application": {
 					"type": "string",
 					"contains": [],
-					"attributes": ["script", "stylesheet", "id"]
+					"attributes": ["script", "stylesheet", "id"],
+					"favnext": "p",
+					"favinside": ""
 				},
 			
 				"listing": {
 					"type": "pre",
 					"contains": ["text"],
-					"attributes": ["type"]
+					"attributes": ["type"],
+					"favnext": "p",
+					"favinside": "#text"
 				},
 			
 				"note": {
 					"type": "string",
 					"contains": ["text", "p", "ul", "code", "a", "strong", "listing", "download", "img", "root"],
-					"attributes": ["type"]
+					"attributes": ["type"],
+					"favnext": "p",
+					"favinside": "#text"
 				},
 
 				"definitions": {
 					"type": "string",
 					"contains": ["term"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "p",
+					"favinside": "term"
 				},
 
 				"term": {
 					"type": "string",
 					"contains": ["text", "strong", "a", "code", "download", "img", "root"],
-					"attributes": ["title"]
+					"attributes": ["title"],
+					"favnext": "term",
+					"favinside": "#text"
 				},
 
 				"tiles": {
 					"type": "string",
 					"contains": ["link"],
-					"attributes": []
+					"attributes": [],
+					"favnext": "p",
+					"favinside": "link"
 				},
 
 				"link": {
 					"type": "string",
 					"contains": [],
-					"attributes": ["href", "title"]
+					"attributes": ["href", "title"],
+					"favnext": "link",
+					"favinside": ""
 				},
 
 				"download": {
 					"type": "string",
 					"contains": ["text"],
-					"attributes": ["href", "size"]
+					"attributes": ["href", "size"],
+					"favnext": "#text",
+					"favinside": "#text"
 				},
 
 				"img": {
 					"type": "string",
 					"contains": [],
-					"attributes": ["src", "title"]
+					"attributes": ["src", "title"],
+					"favnext": "#text",
+					"favinside": ""
 				},
 
 				"root": {
 					"type": "string",
 					"contains": ["leaf"],
-					"attributes": ["title", "description"]
-					
+					"attributes": ["title", "description"],
+					"favnext": "p",
+					"favinside": "leaf"
 				},
 
 				"leaf": {
 					"type": "string",
 					"contains": ["leaf"],
-					"attributes": ["title", "description"]
+					"attributes": ["title", "description"],
+					"favnext": "leaf",
+					"favinside": ""
 				}
 			}
 		</script>

@@ -21,7 +21,7 @@ export class Commands {
 		})
 	}
 
-	_updateTagList(target, tagList) {
+	_updateTagList(target, tagList, favorite) {
 		const tagType = target.dataset.name
 		tagList.innerText = ""
 
@@ -63,6 +63,8 @@ export class Commands {
 			option.text = templateName
 			templateGroup.appendChild(option)
 		}
+
+		tagList.value = favorite
 
 		// Removes any unavailable class.
 		for (let element of tagList.parentNode.children) {
@@ -131,8 +133,17 @@ export class Commands {
 		this.currentElement = element.parentNode
 		const parentElement = this.currentElement.parentNode.parentNode
 
-		this._updateTagList(parentElement, this.siblingTagSelect)
-		this._updateTagList(this.currentElement, this.insideTagSelect)
+		const tagName = this.currentElement.dataset.name
+		this._updateTagList(
+			parentElement,
+			this.siblingTagSelect,
+			tagName === "text" ? "" : this.tree.tagTypes[tagName].favnext
+		)
+		this._updateTagList(
+			this.currentElement,
+			this.insideTagSelect,
+			tagName === "text" ? "" : this.tree.tagTypes[tagName].favinside
+		)
 
 		this.root.classList.add("open")
 
@@ -213,7 +224,6 @@ export class Commands {
 			}
 			this.tree.addTag(element, childTag)
 		}
-		this.tagTemplates[tagType]
 
 		return element
 	}

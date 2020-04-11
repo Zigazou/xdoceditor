@@ -36,6 +36,7 @@ export class XDocEditor {
 		const options = { "passive": true }
 		container.addEventListener("click", (e) => this.onClick(e), options)
 		container.addEventListener("focusout", () => this.preview(), options)
+		container.addEventListener("paste", (e) => this.onPaste(e))
 
 		document.querySelector(".commands-menu-new").addEventListener(
 			"click",
@@ -152,6 +153,18 @@ export class XDocEditor {
 		}
 
 		this.load("/xdoceditor/new.xml", url)
+	}
+
+	onPaste(e) {
+		// Paste text only!
+		const paste = (e.clipboardData || window.clipboardData).getData('text')
+	
+		const selection = window.getSelection()
+		if (!selection.rangeCount) return false
+		selection.deleteFromDocument()
+		selection.getRangeAt(0).insertNode(document.createTextNode(paste))
+	
+		event.preventDefault()
 	}
 
 	onClick(e) {

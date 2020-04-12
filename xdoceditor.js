@@ -1,5 +1,6 @@
 import { HTMLXML } from './htmlxml.js'
 import { Commands } from './commands.js'
+import { Sitemap } from './sitemap.js'
 
 const authorizedUrlCharacters =
 	'/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.'
@@ -108,10 +109,20 @@ export class XDocEditor {
 			"body": xmlSerializer.serializeToString(xml)
 		}
 
+		const sitemap = new Sitemap()
+		sitemap.load()
+			.then(() => {
+				sitemap.setEntry(
+					location.protocol + '//' + location.host + this.xmlURL.replace("/index.xml", ""),
+					(new Date()).toISOString()
+				)
+			})
+			.then(() => sitemap.save())
+
 		fetch(this.xmlURL, putSave)
-		   .then(response => response.text())
-		   .then(data => console.log(data))
-		   .catch(err => console.log(err))
+			.then(response => response.text())
+			.then(data => console.log(data))
+			.catch(err => console.log(err))
 	}
 
 	preview() {

@@ -18,6 +18,7 @@ body {
 	--round-inside: .2em;
 	--main-padding: .75rem;
 	--main-margin: -.75rem;
+	--tag-margin: .5em;
 
 	--round-X---: var(--round-inside) 0 0 0;
 	--round--X--: 0 var(--round-inside) 0 0;
@@ -59,7 +60,7 @@ html, body {
 .workspace-editor {
 	grid-area: editor;
 	position: relative;
-	margin-right: 1em;
+	margin-right: var(--tag-margin);
 	padding: 0 var(--main-padding) var(--main-padding) var(--main-padding);
 	border-right: .2em solid var(--col4);
 	overflow-y: scroll;
@@ -110,7 +111,7 @@ html, body {
 
 .tag {
 	border: .1em solid var(--col5);
-	margin: 1em 0;
+	margin: var(--tag-margin) 0;
 	border-radius: var(--round-corner);
 	transition: opacity 1s ease;
 }
@@ -129,7 +130,7 @@ html, body {
 
 .tag-attribute-value { flex-grow: 1; }
 
-.tag-content { padding: 0 1em 1em 1em; }
+.tag-content { padding: 0 var(--tag-margin) var(--tag-margin) var(--tag-margin); }
 
 .tag-content-hide>.tag-content, .tag-content-hide>.tag-attributes {
 	display: none;
@@ -150,7 +151,7 @@ html, body {
 
 .text {
 	display: flex;
-	margin-top: 1em;
+	margin-top: var(--tag-margin);
 }
 
 .text-handle {

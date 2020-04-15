@@ -177,7 +177,7 @@ export class HTMLXML {
 
 		if (tagName === "text") {
 			parent.appendChild(document.createTextNode(
-				tag.innerText.trimRight("\n")
+				tag.innerText.replace(/[\t\r\n ]+$/, " ")
 			))
 			return
 		}
